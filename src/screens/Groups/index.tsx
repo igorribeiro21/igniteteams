@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { FlatList } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { GroupCard } from '@components/GroupCard';
@@ -10,7 +12,14 @@ import {
 } from './styles';
 
 export function Groups() {
-  const [groups, setGroups] = useState<string[]>(['Galera da Rocket']);
+  const [groups, setGroups] = useState<string[]>([]);
+
+  const navigation = useNavigation();
+
+  function handleNewGroup() {
+    navigation.navigate('new');
+  }
+
   return (
     <Container>
       <Header />
@@ -39,6 +48,7 @@ export function Groups() {
 
       <Button
         title='Criar Nova Turma'
+        onPress={handleNewGroup}
       />
 
     </Container>
